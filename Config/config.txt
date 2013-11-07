@@ -1,0 +1,4 @@
+SFQ=0
+RFQ=10
+LED=on
+AA=150

@@ -1,0 +1,38 @@
+#!/usr/bin/perl 
+use strict;
+use warnings;
+######## getDataAIN.pm ##########
+#	Gets data from ain	#
+#	by Robert J Krasowski	#
+#	7/29/2012		#
+#################################
+
+# to activate AIN's do sudo sudo modprobe ti_tscadc 
+
+use POSIX;
+
+my $value;
+sub getAIN {
+my $ain = shift;
+open (FH, "\/sys\/devices\/platform\/omap\/tsc\/$ain") or die $!;
+
+ 	
+
+		while (<FH>)
+			{
+				$value = $_;
+				$value =~ s/\0//g;
+				$value = $value/41;
+				$value = floor($value);
+				if ($value == 0)
+					{
+						$value = 1;
+					}			
+			}
+
+
+return $value;
+
+close(FH);
+}
+1;
